@@ -1,6 +1,6 @@
 ## What  is TypeScript
 ![](../img/1.png)
-typescript is a superset of javascript.which adds new
+typescript is a superset of javascript. Which adds new features.
 ## why typescript
 ![](../img/2.png)
 
@@ -44,7 +44,7 @@ button.addEventListener("click", function() {
 we can do this 
 ![](../img/4.png)
 
-but we can make it so that we can pass other inputs except numbers.
+but we can make it so that we can't pass other inputs except numbers.
 
 ## Let's use typescript
 let's install typescript globally
@@ -88,3 +88,14 @@ button.addEventListener("click", function () {
 **output**
 
 ![](../img/5.png)
+
+## TypeScript Advantages - Overview
+- we can reduce errors by using types
+- we can get better autocomplete by using typescript
+- next gen js can be used
+- interfaces and generics
+- Decorators
+- very configurable
+
+## course outline
+![](../img/6.png)
