@@ -99,3 +99,50 @@ button.addEventListener("click", function () {
 
 ## course outline
 ![](../img/6.png)
+
+## Course Setup
+```html
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="app.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+```
+🙅‍♂ Note ️🙅‍♀️
+🔥 defer
+This Boolean attribute is set to indicate to a browser that the script 
+is meant to be executed after the document has been parsed, but before firing
+```
+```ts
+console.log('Your code goes here...')
+```
+```js
+console.log('Your code goes here...');
+
+```
+let's create a node package here
+```shell
+
+npm init -y
+
+```
+which will generate the package.json file.
+
+then let's install **lite-server**. and add the start script as below.
+```json
+{
+  "start": "lite-server"
+}
+```
+this has hot reloading
+but we have to compile the ts file every time we make a change to the ts file.
