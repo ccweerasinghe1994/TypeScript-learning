@@ -43,3 +43,20 @@ from this example we can see how to use types with functions.
 we create the result variable because the return statement of the log has a string 
 in the start. if we provide the number after the string it will concatinate the two numbers into string so 
 it can add those converted strings to the first number.
+
+## Objects in typescript
+```ts
+
+const person:{
+    name:string;
+    age:number;
+} = {
+    name :'chamara',
+    age:12,
+}
+
+console.log(person.age);
+console.log(person.name);
+```
+in typescript, we can explicitly define the object or typescript can infer the object types.
+
