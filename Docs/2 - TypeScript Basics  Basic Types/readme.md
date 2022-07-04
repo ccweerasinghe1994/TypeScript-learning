@@ -164,3 +164,28 @@ person.role.push("ksgdfkgsdf");
 ```
 when u want an array with exact width and know the types advance u can use tuples.
 be careful about the map function.
+
+### Enums 
+```ts
+enum Role {
+    ADMIN,
+    READONLY,
+    AUTHOR,
+}
+
+const person= {
+    name :'chamara',
+    age:12,
+    hobbies:['sports','cooking'],
+    role:Role.AUTHOR
+}
+```
+we can provide custom values for the enums.
+these are reusable constants we reuse inside the application.
+
+### any type
+always try to avoid any if u can.
+anything u passed as any tsc can't check for any errors.
+```ts
+let favouriteSports:any[];
+```
