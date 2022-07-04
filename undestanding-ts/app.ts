@@ -1,43 +1,13 @@
-// const person:{
-//     name:string;
-//     age:number;
-//     hobbies:string[];
-//     role:[number,string]
-// }= {
-//     name :'chamara',
-//     age:12,
-//     hobbies:['sports','cooking'],
-//     role:[2,'author'],
-// }
-
-enum Role {
-    ADMIN,
-    READONLY,
-    AUTHOR,
+function combine(input1: number | string, input2: number | string,resultsConversion:'as-number'|'as-string') {
+    let result;
+    if (typeof input1 === 'number' && typeof input2 === 'number' && resultsConversion === "as-number") {
+        result = +input1 + +input2;
+    } else {
+        result = input1.toString() + input2.toString()
+    }
+    return result;
 }
 
-const person= {
-    name :'chamara',
-    age:12,
-    hobbies:['sports','cooking'],
-    role:Role.AUTHOR
-}
-//this is not allowed
-
-// person.role[0] = 'sfsdf';
-// person.role[2] = 'sfsdf';
-
-// this is allowed
-//
-// person.role[1] = 'sfsdf';
-// person.role.push("ksgdfkgsdf");
-
-let favouriteSports:any[];
-favouriteSports=['Sports']
-
-console.log(person.age);
-console.log(person.name);
-
-for (const hobby of person.hobbies){
-    console.log(hobby.toUpperCase())
-}
+console.log(combine(12, 34,'as-number'));
+console.log(combine(12, 34,'as-string'));
+console.log(combine("chamara", "weerasinghe",'as-string'));
