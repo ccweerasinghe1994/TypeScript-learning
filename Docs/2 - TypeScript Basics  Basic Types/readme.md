@@ -60,3 +60,10 @@ console.log(person.name);
 ```
 in typescript, we can explicitly define the object or typescript can infer the object types.
 
+**🔥Note🔥**
+
+In TypeScript, you work with types like string or number all the times.
+
+Important: It is string and number (etc.), NOT String, Number etc.
+
+The core primitive types in TypeScript are all lowercase!
