@@ -162,10 +162,12 @@ const person: {
 person.role[1] = 'sfsdf';
 person.role.push("ksgdfkgsdf");
 ```
+
 when u want an array with exact width and know the types advance u can use tuples.
 be careful about the map function.
 
-### Enums 
+### Enums
+
 ```ts
 enum Role {
     ADMIN,
@@ -173,19 +175,77 @@ enum Role {
     AUTHOR,
 }
 
-const person= {
-    name :'chamara',
-    age:12,
-    hobbies:['sports','cooking'],
-    role:Role.AUTHOR
+const person = {
+    name: 'chamara',
+    age: 12,
+    hobbies: ['sports', 'cooking'],
+    role: Role.AUTHOR
 }
 ```
+
 we can provide custom values for the enums.
 these are reusable constants we reuse inside the application.
 
 ### any type
+
 always try to avoid any if u can.
 anything u passed as any tsc can't check for any errors.
+
 ```ts
-let favouriteSports:any[];
+let favouriteSports: any[];
 ```
+
+### Union Types
+
+```ts
+function combine(input1: number | string, input2: number | string) {
+    let result;
+    if (typeof input1 === 'number' && typeof input2 === 'number') {
+        result = input1 + input2;
+    } else {
+        result = input1.toString() + input2.toString()
+    }
+    return result;
+}
+
+console.log(combine(12, 34));
+console.log(combine("chamara", "weerasinghe"));
+```
+
+by using union type we can add more flexibility to the application.
+
+### using Literal types
+
+```ts
+function combine(input1: number | string, input2: number | string, resultsConversion: 'as-number' | 'as-string') {
+    let result;
+    if (typeof input1 === 'number' && typeof input2 === 'number' && resultsConversion === "as-number") {
+        result = +input1 + +input2;
+    } else {
+        result = input1.toString() + input2.toString()
+    }
+    return result;
+}
+
+console.log(combine(12, 34, 'as-number'));
+console.log(combine(12, 34, 'as-string'));
+console.log(combine("chamara", "weerasinghe", 'as-string'));
+```
+
+we can use literal types to limit the types of inputs we can parse to the function arguments
+
+### Type aliases custom types
+```ts
+type Combine = number | string;
+type versionDescriptor = 'as-number'|'as-string';
+function combine(input1: Combine, input2: Combine,resultsConversion:versionDescriptor) {
+    let result;
+    if (typeof input1 === 'number' && typeof input2 === 'number' && resultsConversion === "as-number") {
+        result = +input1 + +input2;
+    } else {
+        result = input1.toString() + input2.toString()
+    }
+    return result;
+}
+```
+we can reduce the code repeat by using the type alise
