@@ -249,3 +249,17 @@ function combine(input1: Combine, input2: Combine,resultsConversion:versionDescr
 }
 ```
 we can reduce the code repeat by using the type alise
+### Type void and undefined
+```ts
+function add(num1: number, num2: number) {
+    return num1 + num2;
+}
+
+function printResult(num:number):void{
+    console.log("Result is :" + num)
+}
+
+printResult(add(23,2))
+
+let someValue:undefined;
+```
