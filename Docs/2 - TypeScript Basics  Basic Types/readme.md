@@ -105,29 +105,62 @@ This would be the type of such an object:
     }
 }
 ```
-So you 
+
+So you
 
 ## Arrays in typescript
 
 ```ts
-const person= {
-    name :'chamara',
-    age:12,
-    hobbies:['sports','cooking']
+const person = {
+    name: 'chamara',
+    age: 12,
+    hobbies: ['sports', 'cooking']
 }
 
-let favouriteSports:string[];
-favouriteSports=['Sports']
+let favouriteSports: string[];
+favouriteSports = ['Sports']
 
 console.log(person.age);
 console.log(person.name);
 
-for (const hobby of person.hobbies){
+for (const hobby of person.hobbies) {
     console.log(hobby.toUpperCase())
 }
 
 ```
+
 here we are adding a hobbies array to the person object.
 in the favourite sports section we can see how to set explicit types for an Array.
-inside the for loop we can see that the hobby is identified as a string because of the 
+inside the for loop we can see that the hobby is identified as a string because of the
 type inference.
+
+types we have talked about
+
+![](../img/8.png)
+
+## Tuples in typescript
+
+```ts
+const person: {
+    name: string;
+    age: number;
+    hobbies: string[];
+    role: [number, string]
+} = {
+    name: 'chamara',
+    age: 12,
+    hobbies: ['sports', 'cooking'],
+    role: [2, 'author'],
+}
+//this is not allowed
+
+// person.role[0] = 'sfsdf';
+// person.role[2] = 'sfsdf';
+
+// this is allowed
+
+person.role[1] = 'sfsdf';
+person.role.push("ksgdfkgsdf");
+```
+when u want an array with exact width and know the types advance u can use tuples.
+be careful about the map function.
