@@ -1,10 +1,11 @@
-const person:{
-    name:string;
-    age:number;
-} = {
-    name :'chamara',
-    age:12,
+function add(num1: number, num2: number) {
+    return num1 + num2;
 }
 
-console.log(person.age);
-console.log(person.name);
+function printResult(num:number):void{
+    console.log("Result is :" + num)
+}
+
+printResult(add(23,2))
+
+let someValue:undefined;

@@ -1,6 +1,6 @@
-var person = {
-    name: 'chamara',
-    age: 12
-};
-console.log(person.age);
-console.log(person.name);
+function combine(input1, input2) {
+    var result = input1 + input2;
+    return result;
+}
+var data = combine(12, 34);
+console.log(data);
