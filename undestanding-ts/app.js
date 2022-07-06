@@ -1,6 +1,9 @@
-function combine(input1, input2) {
-    var result = input1 + input2;
-    return result;
+var userInput;
+var userName;
+if (typeof userInput === 'string') {
+    userName = userInput;
 }
-var data = combine(12, 34);
-console.log(data);
+function generateError(message, code) {
+    throw { message: message, code: code };
+}
+generateError('Error', 500);

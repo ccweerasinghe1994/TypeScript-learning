@@ -1,11 +1,12 @@
-function add(num1: number, num2: number) {
-    return num1 + num2;
+let userInput: unknown;
+let userName: string;
+
+if (typeof userInput === 'string') {
+  userName = userInput;
 }
 
-function printResult(num:number):void{
-    console.log("Result is :" + num)
+function generateError(message: string, code: number): never {
+  throw { message, code };
 }
 
-printResult(add(23,2))
-
-let someValue:undefined;
+generateError('Error', 500);
