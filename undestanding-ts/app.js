@@ -1,6 +1,11 @@
-function combine(input1, input2) {
-    var result = input1 + input2;
-    return result;
+function add(num1, num2) {
+    return num1 + num2;
 }
-var data = combine(12, 34);
-console.log(data);
+function printResult(num) {
+    console.log('Result is :' + num);
+}
+printResult(add(23, 2));
+var someValue;
+var combineValue;
+combineValue = add;
+console.log(combineValue(12, 3));

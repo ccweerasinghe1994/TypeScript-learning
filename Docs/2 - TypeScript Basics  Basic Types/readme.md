@@ -263,3 +263,19 @@ printResult(add(23,2))
 
 let someValue:undefined;
 ```
+if we return a void function we will get undefined.
+
+### functions as types
+
+```ts
+function add(num1: number, num2: number) {
+  return num1 + num2;
+}
+
+let combineValue: (a: number, b: number) => number;
+
+combineValue = add;
+
+console.log(combineValue(12, 3));
+
+```
