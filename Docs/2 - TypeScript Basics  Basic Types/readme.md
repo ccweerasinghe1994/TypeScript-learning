@@ -312,7 +312,9 @@ addAndHandle(1, 2, (result) => {
   console.log(result);
 });
 ```
+
 ### Type Unknown
+
 ```ts
 let userInput: unknown;
 let userName: string;
@@ -320,8 +322,17 @@ let userName: string;
 if (typeof userInput === 'string') {
   userName = userInput;
 }
-
-
 ```
 
 this can be used when you don't know exactly coming from the variable but u know eventually what u want to do with it.
+
+### type never
+
+```ts
+function generateError(message: string, code: number): never {
+  throw { message, code };
+}
+
+generateError('Error', 500);
+```
+this will never return anything because this will crash the script.
