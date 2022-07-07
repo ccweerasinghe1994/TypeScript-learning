@@ -45,7 +45,39 @@ const addArrow = (a: number, b: number): number => a + b;
 
 ![](../img/10.png)
 
+examples
+
+```ts
+const addArrow = (a: number, b: number): number => a + b;
+
+const printValue: (a: string | number) => void = (value) => console.log(value);
+
+const button = document.querySelector('button');
+
+button?.addEventListener('click', () => {
+  console.log('clicked');
+});
+```
+
 ### 4 - Default Function Parameters
+
+has to be in order
+
+either last or all the values need the default value
+
+```ts
+const addArrow = (a: number, b: number = 2): number => a + b;
+
+addArrow(1);
+```
+
+but this wont
+
+```ts
+const addArrow = (a: number = 2, b: number): number => a + b;
+
+addArrow(1);
+```
 
 ### 5 - The Spread Operator ()
 

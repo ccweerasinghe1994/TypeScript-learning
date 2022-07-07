@@ -1,4 +1,11 @@
+const addArrow = (a: number = 2, b: number): number => a + b;
 
+const printValue: (a: string | number) => void = (value) => console.log(value);
 
+const button = document.querySelector('button');
 
-const addArrow = (a: number, b: number): number => a + b;
+button?.addEventListener('click', () => {
+  console.log('clicked');
+});
+
+addArrow(1);
