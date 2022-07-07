@@ -1,4 +1,8 @@
+const person = {
+  x: 12,
+  y: 45,
+};
 
-
-
-const addArrow = (a: number, b: number): number => a + b;
+const { x: override, y } = person;
+console.log(override);
+console.log(y);
