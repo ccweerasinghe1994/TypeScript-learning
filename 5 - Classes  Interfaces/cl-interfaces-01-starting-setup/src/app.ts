@@ -12,12 +12,30 @@ class Department {
 }
 
 class ItDepartment extends Department {
+  private lastReport: string;
+
+  get mostResentReport() {
+    if (!this.lastReport) {
+      throw new Error('There is no report');
+    }
+    return this.lastReport;
+  }
+
+  set mostResentReport(value: string) {
+    if (!value) {
+      throw new Error('please input a correct value');
+    }
+    this.addReport(value);
+  }
+
   constructor(id: string, public reports: string[]) {
     super('IT', id);
+    this.lastReport = reports[0];
   }
 
   addReport(report: string) {
     this.reports.push(report);
+    this.lastReport = report;
   }
 
   printReport() {
@@ -29,14 +47,7 @@ class ItDepartment extends Department {
   }
 }
 
-const it = new ItDepartment('D1', ['something went wrong']);
+const it = new ItDepartment('D1', ['report']);
 
-it.addEmployees('dasun');
-
-it.describe();
-
-it.addReport('report 2');
-
-it.printReport();
-it.addEmployees('chamara');
-console.log(it);
+console.log((it.mostResentReport = 'this is a test'));
+console.log(it.mostResentReport);
