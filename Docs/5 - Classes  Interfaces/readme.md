@@ -429,16 +429,157 @@ console.log(it2);
 
 ### 16 - A First Interface
 
+```ts
+interface Person {
+  name: string;
+  age: number;
+
+  greet(phrase: string): void;
+}
+
+let user1: Person;
+
+user1 = {
+  age: 12,
+  name: 'chamara',
+  greet(phrase) {
+    console.log(phrase + ' ' + this.name);
+  },
+};
+
+user1.greet('Hi there my name is');
+```
+
 ### 17 - Using Interfaces with Classes
+
+```ts
+interface Getable {
+  name: string;
+
+  greet(phrase: string): void;
+}
+
+class Person implements Getable {
+  name: string;
+  age: number = 30;
+  constructor(n: string) {
+    this.name = n;
+  }
+  greet(phrase: string): void {
+    console.log(phrase + ' ' + this.name);
+  }
+}
+
+let user1: Getable;
+
+user1 = new Person('chamara');
+
+user1.greet('HI there my name is ');
+```
 
 ### 18 - Why Interfaces
 
+we can write robust code.
+
 ### 19 - Readonly Interface Properties
+
+```ts
+interface Getable {
+  readonly name: string;
+
+  greet(phrase: string): void;
+}
+
+class Person implements Getable {
+  name: string;
+  age: number = 30;
+  constructor(n: string) {
+    this.name = n;
+  }
+  greet(phrase: string): void {
+    console.log(phrase + ' ' + this.name);
+  }
+}
+
+let user1: Getable;
+
+user1 = new Person('chamara');
+user1.greet('HI there my name is ');
+```
 
 ### 20 - Extending Interfaces
 
+in classes u can ony inherit one class but in interface u can inherit multiple
+
+```ts
+interface Named {
+  readonly name: string;
+}
+interface Getable extends Named {
+  greet(phrase: string): void;
+}
+
+class Person implements Getable {
+  name: string;
+  age: number = 30;
+  constructor(n: string) {
+    this.name = n;
+  }
+  greet(phrase: string): void {
+    console.log(phrase + ' ' + this.name);
+  }
+}
+
+let user1: Getable;
+
+user1 = new Person('chamara');
+user1.greet('HI there my name is ');
+```
+
 ### 21 - Interfaces as Function Types
 
-### 22 - Optional Parameters Properties23 - Compiling Interfaces to JavaScript
+```ts
+// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+  (a: number, b: number): number;
+}
+let add: AddFn;
 
+add = (a: number, b: number) => {
+  return a + b;
+};
+```
+
+### 22 - Optional Parameters Properties23 - Compiling Interfaces to JavaScript
+```ts
+interface Named {
+  readonly name?: string;
+}
+interface Getable extends Named {
+  greet(phrase: string): void;
+}
+
+class Person implements Getable {
+  name?: string;
+  age: number = 30;
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
+    }
+  }
+  greet(phrase: string): void {
+    if (this.name) {
+      console.log(phrase + ' ' + this.name);
+    } else {
+      console.log('Hi');
+    }
+  }
+}
+
+let user1: Getable;
+
+user1 = new Person();
+user1.greet('HI there my name is ');
+
+```
 ### 23 - Compiling Interfaces to JavaScript

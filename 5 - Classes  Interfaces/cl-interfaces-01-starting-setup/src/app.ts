@@ -1,70 +1,37 @@
-abstract class Department {
-  static physicalYear = '1212';
-  protected employees: string[] = [];
-  constructor(public firstName: string, protected readonly id: string) {}
+// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+  (a: number, b: number): number;
+}
+let add: AddFn;
 
-  abstract describe(this: Department): void;
+add = (a: number, b: number) => {
+  return a + b;
+};
+interface Named {
+  readonly name?: string;
+}
+interface Getable extends Named {
+  greet(phrase: string): void;
+}
 
-  addEmployees(employee: string) {
-    this.employees.push(employee);
+class Person implements Getable {
+  name?: string;
+  age: number = 30;
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
+    }
   }
-
-  static createEmployee(name: string) {
-    return {
-      name: name,
-      year: this.physicalYear,
-    };
+  greet(phrase: string): void {
+    if (this.name) {
+      console.log(phrase + ' ' + this.name);
+    } else {
+      console.log('Hi');
+    }
   }
 }
 
-class ItDepartment extends Department {
-  private lastReport: string;
-  private static instance: ItDepartment;
-  get mostResentReport() {
-    if (!this.lastReport) {
-      throw new Error('There is no report');
-    }
-    return this.lastReport;
-  }
+let user1: Getable;
 
-  set mostResentReport(value: string) {
-    if (!value) {
-      throw new Error('please input a correct value');
-    }
-    this.addReport(value);
-  }
-
-  private constructor(id: string, public reports: string[]) {
-    super('IT', id);
-    this.lastReport = reports[0];
-  }
-
-  static getInstance() {
-    if (this.instance) {
-      return this.instance;
-    }
-    this.instance = new ItDepartment('CD', ['a']);
-    return this.instance;
-  }
-  addReport(report: string) {
-    this.reports.push(report);
-    this.lastReport = report;
-  }
-
-  printReport() {
-    console.log(this.reports);
-  }
-
-  addEmployees(employee: string): void {
-    this.employees.push(employee);
-  }
-  describe() {
-    console.log(`Accounting department ${this.id} : ` + this.firstName);
-  }
-}
-
-const it = ItDepartment.getInstance();
-const it2 = ItDepartment.getInstance();
-
-console.log(it);
-console.log(it2);
+user1 = new Person();
+user1.greet('HI there my name is ');
