@@ -551,6 +551,7 @@ add = (a: number, b: number) => {
 ```
 
 ### 22 - Optional Parameters Properties23 - Compiling Interfaces to JavaScript
+
 ```ts
 interface Named {
   readonly name?: string;
@@ -580,6 +581,114 @@ let user1: Getable;
 
 user1 = new Person();
 user1.greet('HI there my name is ');
-
 ```
+
 ### 23 - Compiling Interfaces to JavaScript
+
+if we use es5
+
+```js
+'use strict';
+var __extends =
+  (this && this.__extends) ||
+  (function () {
+    var extendStatics = function (d, b) {
+      extendStatics =
+        Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array &&
+          function (d, b) {
+            d.__proto__ = b;
+          }) ||
+        function (d, b) {
+          for (var p in b)
+            if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+        };
+      return extendStatics(d, b);
+    };
+    return function (d, b) {
+      if (typeof b !== 'function' && b !== null)
+        throw new TypeError(
+          'Class extends value ' + String(b) + ' is not a constructor or null'
+        );
+      extendStatics(d, b);
+      function __() {
+        this.constructor = d;
+      }
+      d.prototype =
+        b === null
+          ? Object.create(b)
+          : ((__.prototype = b.prototype), new __());
+    };
+  })();
+var Department = (function () {
+  function Department(firstName, id) {
+    this.firstName = firstName;
+    this.id = id;
+    this.employees = [];
+  }
+  Department.prototype.addEmployees = function (employee) {
+    this.employees.push(employee);
+  };
+  Department.createEmployee = function (name) {
+    return {
+      name: name,
+      year: this.physicalYear,
+    };
+  };
+  Department.physicalYear = '1212';
+  return Department;
+})();
+var ItDepartment = (function (_super) {
+  __extends(ItDepartment, _super);
+  function ItDepartment(id, reports) {
+    var _this = _super.call(this, 'IT', id) || this;
+    _this.reports = reports;
+    _this.lastReport = reports[0];
+    return _this;
+  }
+  Object.defineProperty(ItDepartment.prototype, 'mostResentReport', {
+    get: function () {
+      if (!this.lastReport) {
+        throw new Error('There is no report');
+      }
+      return this.lastReport;
+    },
+    set: function (value) {
+      if (!value) {
+        throw new Error('please input a correct value');
+      }
+      this.addReport(value);
+    },
+    enumerable: false,
+    configurable: true,
+  });
+  ItDepartment.getInstance = function () {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new ItDepartment('CD', ['a']);
+    return this.instance;
+  };
+  ItDepartment.prototype.addReport = function (report) {
+    this.reports.push(report);
+    this.lastReport = report;
+  };
+  ItDepartment.prototype.printReport = function () {
+    console.log(this.reports);
+  };
+  ItDepartment.prototype.addEmployees = function (employee) {
+    this.employees.push(employee);
+  };
+  ItDepartment.prototype.describe = function () {
+    console.log(
+      'Accounting department '.concat(this.id, ' : ') + this.firstName
+    );
+  };
+  return ItDepartment;
+})(Department);
+var it = ItDepartment.getInstance();
+var it2 = ItDepartment.getInstance();
+console.log(it);
+console.log(it2);
+//# sourceMappingURL=classes.js.map
+```
