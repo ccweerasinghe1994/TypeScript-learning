@@ -130,6 +130,29 @@ console.log(accounting.describe());
 
 ### 8 - readonly Properties
 
+by using readonly we add extra type safety
+
+```ts
+class Department {
+  private employees: string[] = [];
+  constructor(public firstName: string, private readonly id: string) {}
+
+  describe(this: Department) {
+    console.log(`department ${this.id} : ` + this.firstName);
+  }
+
+  addEmployees(employee: string) {
+    this.employees.push(employee);
+  }
+}
+
+const accounting = new Department('Accounting', 'D1');
+
+accounting.addEmployees('dasun');
+
+accounting.describe();
+```
+
 ### 9 - Inheritance
 
 ### 10 - Overriding Properties The protected Modifier
