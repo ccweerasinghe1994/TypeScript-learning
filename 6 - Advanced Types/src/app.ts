@@ -16,21 +16,22 @@ const e1: ElevatedEmployee = {
   startDate: new Date(),
 };
 
-type Combinable = string | boolean;
-type Numeric = string | number;
+type Combinable = string | number;
+type Numeric = number | boolean;
 
 type Mix = Combinable & Numeric;
 
 // const mix: Mix = "122";
-
+// function add(n1: string, n2: number): string;
+// function add(n1: number, n2: number): number;
+// function add(n1: number, n2: string): string;
+// function add(n1: string, n2: string): string;
 function add(n1: Mix, n2: Mix) {
   if (typeof n1 === "string" || typeof n2 === "string") {
     return n1.toString() + n2.toString();
   }
   return n1 + n2;
 }
-
-add("1", "2");
 
 type UnokwnEmployee = Admin | Employee;
 
@@ -131,3 +132,17 @@ const error: ErrorContainer = {
   email: "not a valid email",
   username: "invalid User name",
 };
+
+const a = {
+  b: {
+    x: {
+      y: 12,
+    },
+  },
+};
+
+console.log(a?.b?.x?.y);
+
+const userinput = "";
+
+const testValue = userinput ?? "DEFAULT";
