@@ -9,3 +9,4 @@
 - [Next-generation JavaScript TypeScript)](./Docs/4%20-%20Next-generation%20JavaScript%20%20TypeScript/readme.md)
 
 - [Classes Interfaces](./Docs/5%20-%20Classes%20%20Interfaces/readme.md)
+- [Advanced Types ](./Docs/6%20-%20Advanced%20Types/readme.md)
