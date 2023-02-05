@@ -98,3 +98,24 @@ function createObject(id: number, weight: string): Goal {
 const tesat: Readonly<string[]> = ["ABC", "EFG"];
 console.log(tesat);
 
+type A = Awaited<
+  Promise<{
+    userId: number;
+    id: number;
+    title: string;
+    completed: boolean;
+  }>
+>;
+
+async function asynctest() {
+  const jsonResponse = await fetch(
+    "https://jsonplaceholder.typicode.com/todos/1"
+  );
+  const data: A = await jsonResponse.json();
+
+  return data;
+}
+ 
+asynctest().then((data) => {
+  console.log(data);
+});
