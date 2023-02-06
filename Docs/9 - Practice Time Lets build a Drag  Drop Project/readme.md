@@ -113,6 +113,8 @@ function AutoBind(_target: any, _name: string, descriptor: PropertyDescriptor) {
 
 6 - Fetching User Input
 
+7 - Creating a Re-Usable Validation Functionality
+
 ```ts
 interface Validatable {
   value: string | number;
@@ -191,8 +193,6 @@ function validate(validateInput: Validatable) {
   }
 ```
 
-7 - Creating a Re-Usable Validation Functionality
-
 ```ts
 
 ```
@@ -206,7 +206,80 @@ function validate(validateInput: Validatable) {
 9 - Managing Application State with Singletons
 
 ```ts
+class ProjectState {
+  private projects: any[] = [];
+  private listeners: any[] = [];
 
+  private static instance: ProjectState;
+
+  private constructor() {}
+  addProject(title: string, description: string, numberOfPeople: number) {
+    const newProject = {
+      id: Math.random().toString(),
+      title,
+      description,
+      people: numberOfPeople,
+    };
+
+    this.projects.push(newProject);
+    for (const listenerFn of this.listeners) {
+      listenerFn(this.projects.slice());
+    }
+  }
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    } else {
+      this.instance = new ProjectState();
+      return this.instance;
+    }
+  }
+
+  addLIsteners(listener: Function) {
+    this.listeners.push(listener);
+  }
+}
+
+const projectState = ProjectState.getInstance();
+
+
+
+class ProjectList {
+  templateElement: HTMLTemplateElement;
+  rootElement: HTMLDivElement;
+  element: HTMLElement;
+  assignProjects: any[];
+  constructor(private type: "active" | "finished") {
+    this.templateElement = document.getElementById(
+      "project-list"
+    ) as HTMLTemplateElement;
+    this.rootElement = document.getElementById("app") as HTMLDivElement;
+    const importNode = document.importNode(this.templateElement.content, true);
+    this.assignProjects = [];
+    this.element = importNode.firstElementChild as HTMLElement;
+    this.element.id = `${this.type}-projects`;
+
+    projectState.addLIsteners((projects: any[]) => {
+      this.assignProjects = projects;
+      this.renderProject();
+    });
+
+    this.attach();
+    this.renderContent();
+  }
+  private renderProject() {
+    const ulElement = document.getElementById(
+      `${this.type}-projects-list`
+    ) as HTMLUListElement;
+    for (const prjItem of this.assignProjects) {
+      const li = document.createElement("li");
+      li.textContent = prjItem.title;
+      ulElement.appendChild(li);
+    }
+  }
+
+  ...
 ```
 
 10 - More Classes Custom Types
