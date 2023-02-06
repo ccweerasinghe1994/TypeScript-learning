@@ -114,7 +114,81 @@ function AutoBind(_target: any, _name: string, descriptor: PropertyDescriptor) {
 6 - Fetching User Input
 
 ```ts
+interface Validatable {
+  value: string | number;
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+}
 
+function validate(validateInput: Validatable) {
+  let isValid = true;
+
+  if (validateInput.required) {
+    isValid = isValid && validateInput.value.toString().trim().length > 0;
+  }
+
+  if (
+    validateInput.maxLength != null &&
+    typeof validateInput.value === "string"
+  ) {
+    isValid =
+      isValid &&
+      validateInput.value.toString().trim().length <= validateInput.maxLength;
+  }
+
+  if (
+    validateInput.minLength != null &&
+    typeof validateInput.value === "string"
+  ) {
+    isValid =
+      isValid &&
+      validateInput.value.toString().trim().length >= validateInput.minLength;
+  }
+  if (validateInput.min != null && typeof validateInput.value === "number") {
+    isValid = isValid && validateInput.value >= validateInput.min;
+  }
+  if (validateInput.max != null && typeof validateInput.value === "number") {
+    isValid = isValid && validateInput.value <= validateInput.max;
+  }
+
+  return isValid;
+}
+
+    const titleValidatable: Validatable = {
+      value: titleElement,
+      required: true,
+    };
+    const descriptionValidatable: Validatable = {
+      value: descriptionElement,
+      required: true,
+      minLength: 5,
+    };
+    const peopleValidatable: Validatable = {
+      value: peopleElement,
+      required: true,
+      min: 1,
+      max: 5,
+    };
+    const peopleValidatable: Validatable = {
+      value: peopleElement,
+      required: true,
+      min: 1,
+      max: 5,
+    };
+    if (
+      !validate(titleValidatable) ||
+      !validate(descriptionValidatable) ||
+      !validate(peopleValidatable)
+    ) {
+      alert("Invalid Input please try again!");
+      return;
+    } else {
+      return [titleElement, descriptionElement, +peopleElement];
+    }
+  }
 ```
 
 7 - Creating a Re-Usable Validation Functionality

@@ -13,6 +13,49 @@ function AutoBind(_target: any, _name: string, descriptor: PropertyDescriptor) {
   return _modifiedDescriptor as TypedPropertyDescriptor<() => void>;
 }
 
+interface Validatable {
+  value: string | number;
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+}
+
+function validate(validateInput: Validatable) {
+  let isValid = true;
+
+  if (validateInput.required) {
+    isValid = isValid && validateInput.value.toString().trim().length > 0;
+  }
+
+  if (
+    validateInput.maxLength != null &&
+    typeof validateInput.value === "string"
+  ) {
+    isValid =
+      isValid &&
+      validateInput.value.toString().trim().length <= validateInput.maxLength;
+  }
+
+  if (
+    validateInput.minLength != null &&
+    typeof validateInput.value === "string"
+  ) {
+    isValid =
+      isValid &&
+      validateInput.value.toString().trim().length >= validateInput.minLength;
+  }
+  if (validateInput.min != null && typeof validateInput.value === "number") {
+    isValid = isValid && validateInput.value >= validateInput.min;
+  }
+  if (validateInput.max != null && typeof validateInput.value === "number") {
+    isValid = isValid && validateInput.value <= validateInput.max;
+  }
+
+  return isValid;
+}
+
 class ProjectInput {
   templateElement: HTMLTemplateElement;
   rootElement: HTMLDivElement;
@@ -50,17 +93,31 @@ class ProjectInput {
   private gatherUserInput(): [string, string, number] | void {
     const titleElement = this.titleElementInput.value;
     const descriptionElement = this.descriptionElementInput.value;
-    const peopleElement = this.peopleElementInput.value;
+    const peopleElement = +this.peopleElementInput.value;
     console.table([
       titleElement.trim().length,
       descriptionElement.trim().length,
-      peopleElement.trim().length,
+      peopleElement,
     ]);
-
+    const titleValidatable: Validatable = {
+      value: titleElement,
+      required: true,
+    };
+    const descriptionValidatable: Validatable = {
+      value: descriptionElement,
+      required: true,
+      minLength: 5,
+    };
+    const peopleValidatable: Validatable = {
+      value: peopleElement,
+      required: true,
+      min: 1,
+      max: 5,
+    };
     if (
-      titleElement.trim().length === 0 ||
-      descriptionElement.trim().length === 0 ||
-      peopleElement.trim().length === 0
+      !validate(titleValidatable) ||
+      !validate(descriptionValidatable) ||
+      !validate(peopleValidatable)
     ) {
       alert("Invalid Input please try again!");
       return;
