@@ -243,14 +243,81 @@ const button = document.querySelector("button");
 button?.addEventListener("click", printer.onmessage);
 ```
 
-## 12 - Validation with Decorators - First Steps
+## 12 - Validation with Decorators
 
 ```ts
+interface ValidatorConfig {
+  [property: string]: {
+    [validatableProps: string]: string[];
+  };
+}
 
-```
+const registeredValidators: ValidatorConfig = {};
 
-## 13 - Validation with Decorators - Finished
+// target prototype of the object this property sits on
+// if it is a static property the constructor function
 
-```ts
+function Required(target: any, propertyName: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [propertyName]: ["required"],
+  };
+}
+function PositiveNumber(target: any, propertyName: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [propertyName]: ["positive"],
+  };
+}
+function validate(obj: any) {
+  const objectValidatorConfig = registeredValidators[obj.constructor.name];
+  if (!objectValidatorConfig) {
+    return true;
+  }
+  let isValid = true;
+  for (const prop in objectValidatorConfig) {
+    for (const validator of objectValidatorConfig[prop]!) {
+      console.log(validator);
 
+      switch (validator) {
+        case "required":
+          isValid = isValid && !!obj[prop];
+          break;
+        case "positive":
+          isValid = isValid && obj[prop] > 0;
+          break;
+      }
+    }
+  }
+  return isValid;
+}
+
+class Course {
+  @Required
+  courseName: string;
+  @PositiveNumber
+  price: number;
+  constructor(courseName: string, price: number) {
+    this.courseName = courseName;
+    this.price = price;
+  }
+}
+
+const form = document.querySelector("form");
+
+form?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const titleElement = document.getElementById("name") as HTMLInputElement;
+  const priceElement = document.getElementById("price") as HTMLInputElement;
+
+  const title = titleElement.value;
+  const price = +priceElement.value;
+
+  const newCourse = new Course(title, price);
+  if (!validate(newCourse)) {
+    alert("Invalid Input, Please Try Again");
+    return;
+  }
+  console.log(newCourse);
+});
 ```
