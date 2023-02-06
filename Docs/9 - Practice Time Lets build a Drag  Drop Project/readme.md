@@ -87,6 +87,27 @@ this.attach();
 5 - Creating Using an Autobind Decorator
 
 ```ts
+function AutoBind(_target: any, _name: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+
+  const _modifiedDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const bindFunction = originalMethod.bind(this);
+      return bindFunction;
+    },
+  };
+
+  return _modifiedDescriptor as TypedPropertyDescriptor<() => void>;
+}
+
+
+  //   @AutoBind
+  private handleSubmit(event: Event) {
+    event.preventDefault();
+    console.log(this.titleElementInput.value);
+  }
 
 ```
 
