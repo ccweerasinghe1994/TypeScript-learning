@@ -3,6 +3,13 @@
 3 - Working with Namespaces
 4 - Organizing Files Folders
 5 - A Problem with Namespace Imports
+update the ts-config
+
+```json
+  "module": "AMD",
+  "outFile": "./dist/bundle.js",
+```
+
 creating a folder structure
 
 ```
@@ -497,5 +504,41 @@ namespace App {
 6 - Important Use Chrome or Firefox
 
 7 - Using ES Modules
+remove all the namespace code and(except export) and use es modules
+example
+change back the ts-config.json
+
+```json
+  "module": "ES6",
+  "module": "ES6",
+```
+
+```ts
+import { Project, ProjectStatus } from "../model/project.model";
+```
+
 8 - Understanding various Import Export Syntaxes
+
+```ts
+// import { Project, ProjectStatus } from "../model/project.model";
+//  we can import the above like this
+import * as ProjectModel from "../model/project.model";
+
+
+import {autobind as AutoBind} ProjectModel from "../model/project.model";
+
+```
+
+we can have one default export per file
+
+```ts
+export default class ...
+
+// then we can use any name when we are importing
+
+import ABC from './asdasd'
+
+```
+
 9 - How Does Code In Modules Execute
+it only runs once
