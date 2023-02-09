@@ -322,7 +322,30 @@ class ProjectList {
   assignProjects: Project[];
   .........
 
-  
+
+// adding listener type
+
+type Listener = (items: Project[]) => void;
+
+// project state management
+class ProjectState {
+  private projects: Project[] = [];
+  // and using it here
+  private listeners: Listener[] = [];
+....
+
+// and using it on the projectState class as well
+
+  addLIsteners(listener: Listener) {
+    this.listeners.push(listener);
+  }
+
+// in the projectList class as well 
+   projectState.addLIsteners((projects: Project[]) => {
+      this.assignProjects = projects;
+      this.renderProject();
+    });
+    
 ```
 11 - Filtering Projects with Enums
 
