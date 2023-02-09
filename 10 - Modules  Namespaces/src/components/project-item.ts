@@ -1,6 +1,6 @@
-import { Draggable } from "../model/drag-and-drop.interfaces";
-import { Project } from "../model/project.model";
-import { Component } from "./base";
+import { Draggable } from "../model/drag-and-drop.interfaces.js";
+import { Project } from "../model/project.model.js";
+import { Component } from "./base.js";
 
 // ProjectItem Class
 export class ProjectItem
@@ -36,8 +36,8 @@ export class ProjectItem
   }
 
   configure() {
-    this.element.addEventListener("dragstart", this.dragStartHandler);
-    this.element.addEventListener("dragend", this.dragEndHandler);
+    this.element.addEventListener("dragstart", this.dragStartHandler.bind(this));
+    this.element.addEventListener("dragend", this.dragEndHandler.bind(this));
   }
 
   renderContent() {

@@ -1,6 +1,6 @@
 // Project State Management
 
-import { Project, ProjectStatus } from "../model/project.model";
+import { Project, ProjectStatus } from "../model/project.model.js";
 
 
   type Listener<T> = (items: T[]) => void;

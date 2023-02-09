@@ -1,8 +1,8 @@
-import { DragTarget } from "../model/drag-and-drop.interfaces";
-import { Project, ProjectStatus } from "../model/project.model";
-import { projectState } from "../state/project-state";
-import { Component } from "./base";
-import { ProjectItem } from "./project-item";
+import { DragTarget } from "../model/drag-and-drop.interfaces.js";
+import { Project, ProjectStatus } from "../model/project.model.js";
+import { projectState } from "../state/project-state.js";
+import { Component } from "./base.js";
+import { ProjectItem } from "./project-item.js";
 
   // ProjectList Class
   export class ProjectList
@@ -44,9 +44,9 @@ import { ProjectItem } from "./project-item";
     }
 
     configure() {
-      this.element.addEventListener("dragover", this.dragOverHandler);
-      this.element.addEventListener("dragleave", this.dragLeaveHandler);
-      this.element.addEventListener("drop", this.dropHandler);
+      this.element.addEventListener("dragover", this.dragOverHandler.bind(this));
+      this.element.addEventListener("dragleave", this.dragLeaveHandler.bind(this));
+      this.element.addEventListener("drop", this.dropHandler.bind(this));
 
       projectState.addListener((projects: Project[]) => {
         const relevantProjects = projects.filter((prj) => {
