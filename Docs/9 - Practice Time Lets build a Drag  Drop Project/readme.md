@@ -283,7 +283,47 @@ class ProjectList {
 ```
 
 10 - More Classes Custom Types
+```ts
+enum ProjectStatus {
+  Active,
+  Finished,
+}
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public state: ProjectStatus
+  ) {}
+}
 
+// and using it on
+addProject(title: string, description: string, numberOfPeople: number) {
+    const newProject = new Project(
+      Math.random().toString(),
+      title,
+      description,
+      numberOfPeople,
+      ProjectStatus.Active
+    );
+
+    this.projects.push(newProject);
+    for (const listenerFn of this.listeners) {
+      listenerFn(this.projects.slice());
+    }
+  }
+
+// and using it on 
+class ProjectList {
+  templateElement: HTMLTemplateElement;
+  rootElement: HTMLDivElement;
+  element: HTMLElement;
+  assignProjects: Project[];
+  .........
+
+  
+```
 11 - Filtering Projects with Enums
 
 ```ts

@@ -1,4 +1,5 @@
 1 - Module Introduction
+![](../img/19.png)
 2 - Writing Module Code - Your Options
 3 - Working with Namespaces
 4 - Organizing Files Folders

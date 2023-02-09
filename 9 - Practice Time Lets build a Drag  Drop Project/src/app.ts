@@ -55,21 +55,36 @@ function validate(validateInput: Validatable) {
 
   return isValid;
 }
+enum ProjectStatus {
+  Active,
+  Finished,
+}
+class Project {
+  constructor(
+    public id: string,
+    public title: string,
+    public description: string,
+    public people: number,
+    public state: ProjectStatus
+  ) {}
+}
 
+// project state management
 class ProjectState {
-  private projects: any[] = [];
+  private projects: Project[] = [];
   private listeners: any[] = [];
 
   private static instance: ProjectState;
 
   private constructor() {}
   addProject(title: string, description: string, numberOfPeople: number) {
-    const newProject = {
-      id: Math.random().toString(),
+    const newProject = new Project(
+      Math.random().toString(),
       title,
       description,
-      people: numberOfPeople,
-    };
+      numberOfPeople,
+      ProjectStatus.Active
+    );
 
     this.projects.push(newProject);
     for (const listenerFn of this.listeners) {
@@ -97,7 +112,7 @@ class ProjectList {
   templateElement: HTMLTemplateElement;
   rootElement: HTMLDivElement;
   element: HTMLElement;
-  assignProjects: any[];
+  assignProjects: Project[];
   constructor(private type: "active" | "finished") {
     this.templateElement = document.getElementById(
       "project-list"
