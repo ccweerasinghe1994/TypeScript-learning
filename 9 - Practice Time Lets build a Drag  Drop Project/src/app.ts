@@ -65,7 +65,7 @@ class Project {
     public title: string,
     public description: string,
     public people: number,
-    public state: ProjectStatus
+    public status: ProjectStatus
   ) {}
 }
 
@@ -125,7 +125,13 @@ class ProjectList {
     this.element = importNode.firstElementChild as HTMLElement;
     this.element.id = `${this.type}-projects`;
     projectState.addLIsteners((projects: Project[]) => {
-      this.assignProjects = projects;
+      const relevantProjects = projects.filter((project) => {
+        if (this.type === "active") {
+          return project.status === ProjectStatus.Active;
+        }
+        return project.status === ProjectStatus.Finished;
+      });
+      this.assignProjects = relevantProjects;
       this.renderProject();
     });
 
@@ -136,6 +142,8 @@ class ProjectList {
     const ulElement = document.getElementById(
       `${this.type}-projects-list`
     ) as HTMLUListElement;
+
+    ulElement.innerHTML = "";
     for (const prjItem of this.assignProjects) {
       const li = document.createElement("li");
       li.textContent = prjItem.title;

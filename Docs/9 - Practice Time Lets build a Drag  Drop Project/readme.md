@@ -348,11 +348,29 @@ class ProjectState {
     
 ```
 11 - Filtering Projects with Enums
-
+let's add the filter method
 ```ts
-
+    projectState.addLIsteners((projects: Project[]) => {
+      const relevantProjects = projects.filter((project) => {
+        if (this.type === "active") {
+          return project.status === ProjectStatus.Active;
+        }
+        return project.status === ProjectStatus.Finished;
+      });
+      this.assignProjects = relevantProjects;
+      this.renderProject();
+    });
 ```
 
+to remove the code duplication 
+```ts
+  private renderProject() {
+    const ulElement = document.getElementById(
+      `${this.type}-projects-list`
+    ) as HTMLUListElement;
+
+    ulElement.innerHTML = "";
+```
 12 - Adding Inheritance Generics
 
 ```ts
